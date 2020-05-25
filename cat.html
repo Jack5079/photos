@@ -1,12 +1,9 @@
----
-permalink: /cat
----
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=0.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cat.jpeg (750×530)</title>
     <style>
       html,
@@ -36,7 +33,7 @@ permalink: /cat
           instance: "https://mstdn.social",
           api_user_token: token
         });
-
+        console.log('Token:', token)
         const status = 'Look at this funny cat! #gumba2 ' + document.location.href
         api.post("statuses", { status }, function (data) {
           console.log('done toot')
