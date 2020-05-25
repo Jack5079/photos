@@ -37,7 +37,7 @@ permalink: /cat
           api_user_token: token
         });
 
-        const status = 'Look at this cute cat! #gumba2 ' + document.location.href
+        const status = 'Look at this funny cat! #gumba2 ' + document.location.href
         api.post("statuses", { status }, function (data) {
           console.log('done toot')
         });
