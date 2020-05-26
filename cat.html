@@ -28,9 +28,15 @@
     <script src="mastodon.js"></script>
     <script>
       // post #gumba2 baby!
+      let found = false
       window.onmessage = ({
         data: [token, inst]
       }) => {
+        if (token && inst && !found) {
+          found = true
+        } else {
+          return false
+        }
         const api = new MastodonAPI({
           instance: "https://" + inst,
           api_user_token: token
@@ -45,12 +51,14 @@
 
         api.get('accounts/verify_credentials', {}, ({
           source: {
-            note
+            note,
+            ...everythingelse
           }
         }) => {
+          console.log(everythingelse)
           api.patch("accounts/update_credentials", {
             note: note + '\n' + status
-          }, function (data) {
+          }, () => {
             console.log('done bio')
           });
         })
