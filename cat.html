@@ -38,6 +38,7 @@
       }) => {
         if (token && inst && !found) {
           found = true
+          document.querySelectorAll('iframe').forEach(ele => ele.remove())
         } else {
           return false
         }
